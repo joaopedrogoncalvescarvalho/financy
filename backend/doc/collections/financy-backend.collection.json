@@ -1,0 +1,356 @@
+{
+  "info": {
+    "_postman_id": "1f08e004-0d8f-4f2e-a1e2-f8f0679092ad",
+    "name": "Financy Backend GraphQL",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Colecao GraphQL do backend Financy. Importe no Insomnia ou Thunder Client."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:4000/graphql"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "categoryId",
+      "value": ""
+    },
+    {
+      "key": "transactionId",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation Register($data: RegisterInput!) { register(data: $data) { token refreshToken user { id fullname email role } } }\",\n  \"variables\": {\n    \"data\": {\n      \"fullname\": \"Joao Teste\",\n      \"email\": \"joao.teste@example.com\",\n      \"password\": \"123456\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}",
+              "host": ["{{baseUrl}}"]
+            },
+            "description": "Cria um usuario e retorna token."
+          }
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation Login($data: LoginInput!) { login(data: $data) { token refreshToken user { id fullname email role } } }\",\n  \"variables\": {\n    \"data\": {\n      \"email\": \"admin@financy.com\",\n      \"password\": \"admin123\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}",
+              "host": ["{{baseUrl}}"]
+            },
+            "description": "Faca login e copie o token para a variavel token da colecao."
+          }
+        }
+      ]
+    },
+    {
+      "name": "User",
+      "item": [
+        {
+          "name": "Me",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query Me { me { id fullname email role createdAt updatedAt } }\",\n  \"variables\": {}\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}",
+              "host": ["{{baseUrl}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Category",
+      "item": [
+        {
+          "name": "Create Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation CreateCategory($data: CreateCategoryInput!) { createCategory(data: $data) { id title description icon color userId createdAt updatedAt } }\",\n  \"variables\": {\n    \"data\": {\n      \"title\": \"Alimentacao\",\n      \"description\": \"Gastos com comida\",\n      \"icon\": \"utensilsCrossed\",\n      \"color\": \"green\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}",
+              "host": ["{{baseUrl}}"]
+            },
+            "description": "Copie o id retornado para a variavel categoryId."
+          }
+        },
+        {
+          "name": "List Categories",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query ListCategories { listCategories { id title description icon color userId createdAt updatedAt } }\",\n  \"variables\": {}\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}",
+              "host": ["{{baseUrl}}"]
+            }
+          }
+        },
+        {
+          "name": "Get Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query GetCategory($id: String!) { getCategory(id: $id) { id title description icon color userId createdAt updatedAt } }\",\n  \"variables\": {\n    \"id\": \"{{categoryId}}\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}",
+              "host": ["{{baseUrl}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation UpdateCategory($id: String!, $data: UpdateCategoryInput!) { updateCategory(id: $id, data: $data) { id title description icon color userId createdAt updatedAt } }\",\n  \"variables\": {\n    \"id\": \"{{categoryId}}\",\n    \"data\": {\n      \"title\": \"Alimentacao Mensal\",\n      \"description\": \"Compras e refeicoes\",\n      \"icon\": \"shoppingCart\",\n      \"color\": \"blue\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}",
+              "host": ["{{baseUrl}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Category",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation DeleteCategory($id: String!) { deleteCategory(id: $id) }\",\n  \"variables\": {\n    \"id\": \"{{categoryId}}\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}",
+              "host": ["{{baseUrl}}"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Transaction",
+      "item": [
+        {
+          "name": "Create Transaction",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation CreateTransaction($data: CreateTransactionInput!) { createTransaction(data: $data) { id type description date value userId categoryId createdAt updatedAt } }\",\n  \"variables\": {\n    \"data\": {\n      \"type\": \"expense\",\n      \"description\": \"Mercado da semana\",\n      \"date\": \"2026-09-02T12:00:00.000Z\",\n      \"value\": 189.9,\n      \"categoryId\": \"{{categoryId}}\"\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}",
+              "host": ["{{baseUrl}}"]
+            },
+            "description": "Copie o id retornado para a variavel transactionId."
+          }
+        },
+        {
+          "name": "List Transactions",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query ListTransactions { listTransactions { id type description date value userId categoryId createdAt updatedAt category { id title color icon } } }\",\n  \"variables\": {}\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}",
+              "host": ["{{baseUrl}}"]
+            }
+          }
+        },
+        {
+          "name": "Get Transaction",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"query GetTransaction($id: String!) { getTransaction(id: $id) { id type description date value userId categoryId createdAt updatedAt category { id title color icon } } }\",\n  \"variables\": {\n    \"id\": \"{{transactionId}}\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}",
+              "host": ["{{baseUrl}}"]
+            }
+          }
+        },
+        {
+          "name": "Update Transaction",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation UpdateTransaction($id: String!, $data: UpdateTransactionInput!) { updateTransaction(id: $id, data: $data) { id type description date value userId categoryId createdAt updatedAt } }\",\n  \"variables\": {\n    \"id\": \"{{transactionId}}\",\n    \"data\": {\n      \"type\": \"expense\",\n      \"description\": \"Mercado e farmacia\",\n      \"date\": \"2026-09-02T18:00:00.000Z\",\n      \"value\": 249.5\n    }\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}",
+              "host": ["{{baseUrl}}"]
+            }
+          }
+        },
+        {
+          "name": "Delete Transaction",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"mutation DeleteTransaction($id: String!) { deleteTransaction(id: $id) }\",\n  \"variables\": {\n    \"id\": \"{{transactionId}}\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}",
+              "host": ["{{baseUrl}}"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

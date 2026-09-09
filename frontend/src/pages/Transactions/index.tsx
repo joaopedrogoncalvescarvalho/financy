@@ -23,7 +23,6 @@ import {
   formatMoney,
   getMonthKey,
   shortDateFormatter,
-  toMonthLabel,
   transactionTypeLabel,
 } from "@/lib/finance";
 import type { Category, Transaction, TransactionType } from "@/types";

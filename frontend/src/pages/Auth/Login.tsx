@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 import { useAuthStore } from "@/stores/auth";
 import { toast } from "sonner";
 import { Brand } from "@/components/Brand";
-import { EyeOff, Lock, Mail, UserRoundPlus } from "lucide-react";
+import { Eye, EyeClosed, Lock, Mail, UserRoundPlus } from "lucide-react";
 
 export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const login = useAuthStore((state) => state.login);
 
@@ -79,14 +80,25 @@ export function Login() {
               <Lock className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
               <Input
                 id="password"
-                type="password"
+                type={showPassword ? "text" : "password"}
                 placeholder="Digite sua senha"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="h-[52px] border-[#D8E1EE] bg-white pl-10 pr-10 text-[16px] text-slate-700 placeholder:text-slate-400 focus-visible:ring-0"
                 required
               />
-              <EyeOff className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
+              <button
+                type="button"
+                aria-label={showPassword ? "Ocultar senha" : "Mostrar senha"}
+                onClick={() => setShowPassword((prev) => !prev)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 transition-colors hover:text-slate-700"
+              >
+                {showPassword ? (
+                  <Eye className="h-4 w-4" />
+                ) : (
+                  <EyeClosed className="h-4 w-4" />
+                )}
+              </button>
             </div>
           </div>
 

@@ -95,10 +95,10 @@ export function CategoriesPage() {
       <div className="grid gap-4 md:grid-cols-3">
         <article className="rounded-2xl border border-[#D8E1EE] bg-white p-6">
           <div className="flex items-start gap-3">
-            <span className="mt-1 inline-flex h-8 w-8 items-center justify-center rounded-lg text-slate-700">
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-slate-700">
               <Tag className="h-5 w-5" />
             </span>
-            <div>
+            <div className="flex flex-col justify-start">
               <p className="text-[1.9rem] font-bold leading-none text-slate-900">
                 {categories.length}
               </p>
@@ -111,10 +111,10 @@ export function CategoriesPage() {
 
         <article className="rounded-2xl border border-[#D8E1EE] bg-white p-6">
           <div className="flex items-start gap-3">
-            <span className="mt-1 inline-flex h-8 w-8 items-center justify-center rounded-lg text-violet-600">
+            <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg text-violet-600">
               <ArrowUpDown className="h-5 w-5" />
             </span>
-            <div>
+            <div className="flex flex-col justify-start">
               <p className="text-[1.9rem] font-bold leading-none text-slate-900">
                 {transactions.length}
               </p>
@@ -129,7 +129,7 @@ export function CategoriesPage() {
           {mostUsedCategory ? (
             <div className="flex items-start gap-3">
               <span
-                className={`mt-1 inline-flex h-8 w-8 items-center justify-center rounded-lg`}
+                className={`inline-flex h-8 w-8 items-center justify-center rounded-lg`}
               >
                 {(() => {
                   const Icon = categoryIconMap[mostUsedCategory.icon];
@@ -137,7 +137,7 @@ export function CategoriesPage() {
                 })()}
               </span>
 
-              <div className="flex-1">
+              <div className="flex flex-col justify-start">
                 <p className="text-[1.9rem] font-bold leading-none text-slate-900">
                   {mostUsedCategory.title}
                 </p>

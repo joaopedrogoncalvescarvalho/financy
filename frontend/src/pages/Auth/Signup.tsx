@@ -109,7 +109,7 @@ export function Signup() {
               </div>
               <Button
                 type="submit"
-                className="h-12 w-full text-base"
+                className="h-12 w-full text-base font-medium"
                 disabled={loading}
               >
                 Cadastrar
@@ -120,11 +120,11 @@ export function Signup() {
             <div className="relative mb-5 mt-1">
               <div className="h-px w-full bg-border" />
               <span className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-3 text-sm text-slate-500">
-                Ou
+                ou
               </span>
             </div>
             <p className="mb-4 text-center text-slate-600">Já tem uma conta?</p>
-            <Button variant="outline" className="h-12 w-full" asChild>
+            <Button variant="outline" className="h-12 w-full bg-white" asChild>
               <Link to="/login" className="gap-2 text-base">
                 <ArrowRightToLine className="h-4 w-4" />
                 Fazer login

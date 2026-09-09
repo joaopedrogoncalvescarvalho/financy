@@ -120,7 +120,7 @@ export function Login() {
 
           <Button
             type="submit"
-            className="mt-2 h-[52px] w-full rounded-xl bg-[#1F6F43] text-[18px] font-bold text-white shadow-none hover:bg-[#1a5a3a]"
+            className="mt-2 h-[52px] w-full rounded-xl bg-[#1F6F43] font-medium text-[16px] text-white shadow-none hover:bg-[#1a5a3a]"
             disabled={loading}
           >
             {loading ? "Entrando..." : "Entrar"}

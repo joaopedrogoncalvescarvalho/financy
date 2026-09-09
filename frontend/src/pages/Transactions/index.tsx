@@ -203,7 +203,7 @@ export function TransactionsPage() {
         </label>
 
         <label className="space-y-2">
-          <span className="text-sm font-medium">Periodo</span>
+          <span className="text-sm font-medium">Período</span>
           <select
             className="h-12 w-full rounded-md border border-input bg-transparent px-3 text-base outline-none focus-visible:ring-1 focus-visible:ring-ring"
             value={monthFilter}
@@ -213,11 +213,18 @@ export function TransactionsPage() {
             }}
           >
             <option value="all">Todos</option>
-            {monthOptions.map((month) => (
-              <option key={month} value={month}>
-                {toMonthLabel(month)}
-              </option>
-            ))}
+            {monthOptions.map((month) => {
+              const [year, monthNumber] = month.split("-").map(Number);
+              const monthName = new Date(year, monthNumber - 1, 1)
+                .toLocaleDateString("pt-BR", { month: "long" })
+                .replace(/^./, (char) => char.toUpperCase());
+
+              return (
+                <option key={month} value={month}>
+                  {monthName} / {year}
+                </option>
+              );
+            })}
           </select>
         </label>
       </div>

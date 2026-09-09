@@ -144,9 +144,6 @@ export function CategoriesPage() {
                 <p className="mt-2 text-[0.7rem] uppercase tracking-[0.16em] text-slate-500">
                   Categoria mais utilizada
                 </p>
-                <p className="mt-3 text-sm text-slate-500">
-                  {usageMap.get(mostUsedCategory.id) ?? 0} itens
-                </p>
               </div>
             </div>
           ) : (

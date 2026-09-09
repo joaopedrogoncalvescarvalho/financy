@@ -5,10 +5,10 @@ import {
   ChevronRight,
   CircleArrowDown,
   CircleArrowUp,
-  Edit2,
+  Edit,
   Plus,
   Search,
-  Trash2,
+  Trash,
   WalletCards,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -325,9 +325,9 @@ export function TransactionsPage() {
                           size="icon"
                           variant="outline"
                           onClick={() => handleDelete(item.id)}
-                          className="text-red-600"
+                          className="bg-white text-red-600 hover:bg-red-50"
                         >
-                          <Trash2 className="h-4 w-4" />
+                          <Trash className="h-4 w-4" />
                         </Button>
                         <Button
                           size="icon"
@@ -336,8 +336,9 @@ export function TransactionsPage() {
                             setSelectedTransaction(item);
                             setDialogOpen(true);
                           }}
+                          className="bg-white hover:bg-slate-50"
                         >
-                          <Edit2 className="h-4 w-4" />
+                          <Edit className="h-4 w-4" />
                         </Button>
                       </div>
                     </td>

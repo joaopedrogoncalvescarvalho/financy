@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client/react";
-import { ArrowUpDown, Edit, Plus, Tags, Trash } from "lucide-react";
+import { ArrowUpDown, Edit, Plus, Tag, Trash } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { LIST_CATEGORIES } from "@/lib/graphql/queries/Categories";
@@ -94,45 +94,57 @@ export function CategoriesPage() {
 
       <div className="grid gap-4 md:grid-cols-3">
         <article className="rounded-2xl border border-[#D8E1EE] bg-white p-6">
-          <p className="mb-2 flex items-center gap-2 text-sm uppercase tracking-[0.1em] text-slate-500">
-            <Tags className="h-4 w-4" /> Total de categorias
-          </p>
-          <p className="text-5xl font-bold leading-none text-slate-900">
-            {categories.length}
-          </p>
+          <div className="flex items-start gap-3">
+            <span className="mt-1 inline-flex h-8 w-8 items-center justify-center rounded-lg text-slate-700">
+              <Tag className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="text-[1.9rem] font-bold leading-none text-slate-900">
+                {categories.length}
+              </p>
+              <p className="mt-2 text-[0.7rem] uppercase tracking-[0.16em] text-slate-500">
+                Total de categorias
+              </p>
+            </div>
+          </div>
         </article>
 
         <article className="rounded-2xl border border-[#D8E1EE] bg-white p-6">
-          <p className="mb-2 flex items-center gap-2 text-sm uppercase tracking-[0.1em] text-slate-500">
-            <ArrowUpDown className="h-4 w-4 text-violet-600" /> Total de
-            transações
-          </p>
-          <p className="text-5xl font-bold leading-none text-slate-900">
-            {transactions.length}
-          </p>
+          <div className="flex items-start gap-3">
+            <span className="mt-1 inline-flex h-8 w-8 items-center justify-center rounded-lg text-violet-600">
+              <ArrowUpDown className="h-5 w-5" />
+            </span>
+            <div>
+              <p className="text-[1.9rem] font-bold leading-none text-slate-900">
+                {transactions.length}
+              </p>
+              <p className="mt-2 text-[0.7rem] uppercase tracking-[0.16em] text-slate-500">
+                Total de transações
+              </p>
+            </div>
+          </div>
         </article>
 
         <article className="rounded-2xl border border-[#D8E1EE] bg-white p-6">
-          <p className="mb-2 text-sm uppercase tracking-[0.1em] text-slate-500">
-            Categoria mais utilizada
-          </p>
           {mostUsedCategory ? (
-            <div className="flex items-center gap-3">
+            <div className="flex items-start gap-3">
               <span
-                className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ${
-                  categoryColorMap[mostUsedCategory.color].iconBox
-                }`}
+                className={`mt-1 inline-flex h-8 w-8 items-center justify-center rounded-lg`}
               >
                 {(() => {
                   const Icon = categoryIconMap[mostUsedCategory.icon];
                   return <Icon className="h-5 w-5" />;
                 })()}
               </span>
-              <div>
-                <p className="text-5xl font-bold leading-none text-slate-900">
+
+              <div className="flex-1">
+                <p className="text-[1.9rem] font-bold leading-none text-slate-900">
                   {mostUsedCategory.title}
                 </p>
-                <p className="text-sm text-slate-500">
+                <p className="mt-2 text-[0.7rem] uppercase tracking-[0.16em] text-slate-500">
+                  Categoria mais utilizada
+                </p>
+                <p className="mt-3 text-sm text-slate-500">
                   {usageMap.get(mostUsedCategory.id) ?? 0} itens
                 </p>
               </div>

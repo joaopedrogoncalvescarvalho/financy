@@ -154,10 +154,10 @@ export function DashboardPage() {
                       </div>
                     </div>
 
-                    <div className="text-right">
+                    <div className="grid auto-cols-max grid-flow-col items-center justify-end gap-16 text-right">
                       {category ? (
                         <span
-                          className={`mb-1 inline-flex rounded-full px-3 py-1 text-sm ${palette?.badge}`}
+                          className={`inline-flex rounded-full px-3 py-1 text-sm ${palette?.badge}`}
                         >
                           {category.title}
                         </span>
@@ -214,7 +214,7 @@ export function DashboardPage() {
                 return (
                   <li
                     key={item.category.id}
-                    className="grid grid-cols-[1fr_auto_auto] items-center gap-3 text-sm"
+                    className="grid grid-cols-[1fr_auto_auto] items-center gap-4 text-sm"
                   >
                     <span
                       className={`inline-flex w-fit rounded-full px-3 py-1 ${palette.badge}`}

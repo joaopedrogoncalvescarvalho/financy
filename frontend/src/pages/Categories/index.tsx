@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client/react";
-import { ArrowUpDown, Edit2, Plus, Tags, Trash2 } from "lucide-react";
+import { ArrowUpDown, Edit, Plus, Tags, Trash } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { LIST_CATEGORIES } from "@/lib/graphql/queries/Categories";
@@ -171,9 +171,9 @@ export function CategoriesPage() {
                       size="icon"
                       variant="outline"
                       onClick={() => removeCategory(category.id)}
-                      className="text-red-600"
+                      className="bg-white text-red-600 hover:bg-red-50"
                     >
-                      <Trash2 className="h-4 w-4" />
+                      <Trash className="h-4 w-4" />
                     </Button>
                     <Button
                       size="icon"
@@ -182,8 +182,9 @@ export function CategoriesPage() {
                         setSelectedCategory(category);
                         setDialogOpen(true);
                       }}
+                      className="bg-white hover:bg-slate-50"
                     >
-                      <Edit2 className="h-4 w-4" />
+                      <Edit className="h-4 w-4" />
                     </Button>
                   </div>
                 </div>

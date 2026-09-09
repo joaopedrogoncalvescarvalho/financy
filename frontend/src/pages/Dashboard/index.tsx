@@ -4,9 +4,9 @@ import { Link } from "react-router-dom";
 import {
   CircleArrowDown,
   CircleArrowUp,
-  ArrowRight,
+  ChevronRight,
   Plus,
-  WalletCards,
+  Wallet,
   ArrowUpCircle,
   ArrowDownCircle,
 } from "lucide-react";
@@ -81,7 +81,7 @@ export function DashboardPage() {
       <div className="grid gap-4 md:grid-cols-3">
         <div className="rounded-2xl border border-[#D8E1EE] bg-white p-6">
           <p className="mb-3 flex items-center gap-2 text-sm uppercase tracking-wide text-slate-500">
-            <WalletCards className="h-4 w-4 text-violet-600" /> Saldo total
+            <Wallet className="h-4 w-4 text-violet-600" /> Saldo total
           </p>
           <p className="text-4xl font-bold text-slate-900">
             {moneyFormatter.format(balance)}
@@ -116,7 +116,7 @@ export function DashboardPage() {
               to="/transactions"
               className="inline-flex items-center gap-2 text-sm font-semibold text-primary"
             >
-              Ver todas <ArrowRight className="h-4 w-4" />
+              Ver todas <ChevronRight className="h-4 w-4" />
             </Link>
           </header>
 
@@ -129,9 +129,7 @@ export function DashboardPage() {
                 const palette = category
                   ? categoryColorMap[category.color]
                   : null;
-                const Icon = category
-                  ? categoryIconMap[category.icon]
-                  : WalletCards;
+                const Icon = category ? categoryIconMap[category.icon] : Wallet;
 
                 return (
                   <li
@@ -203,7 +201,7 @@ export function DashboardPage() {
               to="/categories"
               className="inline-flex items-center gap-2 text-sm font-semibold text-primary"
             >
-              Gerenciar <ArrowRight className="h-4 w-4" />
+              Gerenciar <ChevronRight className="h-4 w-4" />
             </Link>
           </header>
 

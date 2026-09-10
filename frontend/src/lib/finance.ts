@@ -47,22 +47,25 @@ export const transactionTypeLabel: Record<TransactionType, string> = {
 };
 
 export const categoryIconMap: Record<CategoryIcon, LucideIcon> = {
-  basket: ShoppingBasket,
-  bookOpen: BookOpen,
   briefcase: Briefcase,
-  cakeSlice: CakeSlice,
   car: Car,
-  creditCard: CreditCard,
-  footprints: Footprints,
-  gift: Gift,
   heartPulse: HeartPulse,
-  house: Home,
-  partyPopper: PartyPopper,
   piggyBank: PiggyBank,
-  receiptText: ReceiptText,
   shoppingCart: ShoppingCart,
   ticket: Ticket,
+  creditCard: CreditCard,
   utensilsCrossed: UtensilsCrossed,
+
+  //
+  house: Home,
+  gift: Gift,
+  //
+  basket: ShoppingBasket,
+  bookOpen: BookOpen,
+  cakeSlice: CakeSlice,
+  footprints: Footprints,
+  partyPopper: PartyPopper,
+  receiptText: ReceiptText,
 };
 
 export const categoryColorMap: Record<

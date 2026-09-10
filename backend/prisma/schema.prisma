@@ -28,21 +28,21 @@ enum CategoryColor {
 }
 
 enum CategoryIcon {
-  briefcase
-  car
+  briefcaseBusiness
+  carFront
   heartPulse
   piggyBank
   shoppingCart
   ticket
-  cakeSlice
-  utensilsCrossed
-  footprints
+  toolCase
+  utensils
+  pawPrint
   house
   gift
-  partyPopper
+  dumbbell
   bookOpen
-  basket
-  creditCard
+  baggageClaim
+  mailbox
   receiptText
 }
 

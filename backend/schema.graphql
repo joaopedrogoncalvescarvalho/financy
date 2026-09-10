@@ -16,22 +16,22 @@ enum CategoryColor {
 
 """Icon used to represent a category"""
 enum CategoryIcon {
-  basket
+  baggageClaim
   bookOpen
-  briefcase
-  cakeSlice
-  car
-  creditCard
-  footprints
+  briefcaseBusiness
+  carFront
+  dumbbell
   gift
   heartPulse
   house
-  partyPopper
+  mailbox
+  pawPrint
   piggyBank
   receiptText
   shoppingCart
   ticket
-  utensilsCrossed
+  toolCase
+  utensils
 }
 
 type CategoryModel {

@@ -197,7 +197,7 @@ export function TransactionDialog({
                   <Input
                     id="date"
                     type="date"
-                    className="h-12 pr-10"
+                    className="h-12 pr-10 appearance-none [&::-webkit-calendar-picker-indicator]:hidden"
                     value={date}
                     onChange={(event) => setDate(event.target.value)}
                     required

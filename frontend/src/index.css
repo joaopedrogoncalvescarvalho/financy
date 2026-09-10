@@ -33,6 +33,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground antialiased;
     font-family: "Inter", sans-serif;
@@ -51,5 +52,14 @@
 
   #root {
     min-height: 100vh;
+  }
+
+  input[type="date"]:not(:focus):invalid {
+    color: transparent;
+  }
+
+  input[type="date"]:valid,
+  input[type="date"]:focus {
+    color: inherit;
   }
 }

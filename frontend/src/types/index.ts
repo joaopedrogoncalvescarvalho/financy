@@ -30,22 +30,22 @@ export type CategoryColor =
   | "yellow";
 
 export type CategoryIcon =
-  | "basket"
-  | "bookOpen"
-  | "briefcase"
-  | "cakeSlice"
-  | "car"
-  | "creditCard"
-  | "footprints"
-  | "gift"
+  | "briefcaseBusiness"
+  | "carFront"
   | "heartPulse"
-  | "house"
-  | "partyPopper"
   | "piggyBank"
-  | "receiptText"
   | "shoppingCart"
   | "ticket"
-  | "utensilsCrossed";
+  | "toolCase"
+  | "utensils"
+  | "pawPrint"
+  | "house"
+  | "gift"
+  | "dumbbell"
+  | "bookOpen"
+  | "baggageClaim"
+  | "mailbox"
+  | "receiptText";
 
 export interface Category {
   id: string;

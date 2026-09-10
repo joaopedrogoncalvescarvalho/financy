@@ -54,7 +54,7 @@ export const categoryIconMap: Record<CategoryIcon, LucideIcon> = {
   shoppingCart: ShoppingCart,
   ticket: Ticket,
   toolCase: ToolCase,
-  Utensils: Utensils,
+  utensils: Utensils,
   pawPrint: PawPrint,
   house: Home,
   gift: Gift,

@@ -41,7 +41,7 @@ export function CategoryDialog({
 }: CategoryDialogProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [icon, setIcon] = useState<CategoryIcon>("briefcase");
+  const [icon, setIcon] = useState<CategoryIcon>("briefcaseBusiness");
   const [color, setColor] = useState<CategoryColor>("green");
 
   const [createCategory, { loading: creating }] = useMutation(CREATE_CATEGORY);
@@ -62,7 +62,7 @@ export function CategoryDialog({
 
     setTitle("");
     setDescription("");
-    setIcon("briefcase");
+    setIcon("briefcaseBusiness");
     setColor("green");
   }, [open, category]);
 

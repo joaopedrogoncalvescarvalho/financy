@@ -156,7 +156,7 @@ export function TransactionDialog({
                 onClick={() => setType("expense")}
                 className={`flex h-12 items-center justify-center gap-2 rounded-lg border text-base ${
                   type === "expense"
-                    ? "border-[#EF4444] text-[#EF4444]"
+                    ? "border-[#EF4444] bg-[#F8F9FA] text-[#EF4444]"
                     : "border-transparent text-slate-500"
                 }`}
               >
@@ -168,7 +168,7 @@ export function TransactionDialog({
                 onClick={() => setType("income")}
                 className={`flex h-12 items-center justify-center gap-2 rounded-lg border text-base ${
                   type === "income"
-                    ? "border-[#16A34A] text-[#16A34A]"
+                    ? "border-[#16A34A] bg-[#F8F9FA] text-[#16A34A]"
                     : "border-transparent text-slate-500"
                 }`}
               >

@@ -1,21 +1,21 @@
 import {
   BookOpen,
-  Briefcase,
-  CakeSlice,
-  Car,
-  CreditCard,
-  Footprints,
+  BriefcaseBusiness,
+  CarFront,
   Gift,
   HeartPulse,
   Home,
-  PartyPopper,
   PiggyBank,
   ReceiptText,
-  ShoppingBasket,
   ShoppingCart,
   Ticket,
-  UtensilsCrossed,
+  ToolCase,
+  Utensils,
+  Dumbbell,
+  PawPrint,
+  BaggageClaim,
   type LucideIcon,
+  Mailbox,
 } from "lucide-react";
 import type {
   Category,
@@ -47,24 +47,21 @@ export const transactionTypeLabel: Record<TransactionType, string> = {
 };
 
 export const categoryIconMap: Record<CategoryIcon, LucideIcon> = {
-  briefcase: Briefcase,
-  car: Car,
+  briefcase: BriefcaseBusiness,
+  car: CarFront,
   heartPulse: HeartPulse,
   piggyBank: PiggyBank,
   shoppingCart: ShoppingCart,
   ticket: Ticket,
-  creditCard: CreditCard,
-  utensilsCrossed: UtensilsCrossed,
-
-  //
+  creditCard: ToolCase,
+  utensilsCrossed: Utensils,
+  pawPrint: PawPrint,
   house: Home,
   gift: Gift,
-  //
-  basket: ShoppingBasket,
+  dumbbell: Dumbbell,
   bookOpen: BookOpen,
-  cakeSlice: CakeSlice,
-  footprints: Footprints,
-  partyPopper: PartyPopper,
+  baggageClaim: BaggageClaim,
+  mailbox: Mailbox,
   receiptText: ReceiptText,
 };
 

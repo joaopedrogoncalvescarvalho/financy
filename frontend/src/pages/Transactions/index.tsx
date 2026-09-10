@@ -20,9 +20,9 @@ import { DELETE_TRANSACTION } from "@/lib/graphql/mutations/Transaction";
 import {
   categoryColorMap,
   categoryIconMap,
+  formatCalendarDate,
   formatMoney,
   getMonthKey,
-  shortDateFormatter,
   transactionTypeLabel,
 } from "@/lib/finance";
 import type { Category, Transaction, TransactionType } from "@/types";
@@ -285,7 +285,7 @@ export function TransactionsPage() {
                       </div>
                     </td>
                     <td className="px-5 py-4 text-slate-600">
-                      {shortDateFormatter.format(new Date(item.date))}
+                      {formatCalendarDate(item.date)}
                     </td>
                     <td className="px-5 py-4">
                       {category ? (

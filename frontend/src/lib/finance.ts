@@ -113,15 +113,22 @@ export function formatMoney(value: number, type?: TransactionType) {
     : `- ${moneyFormatter.format(Math.abs(signed))}`;
 }
 
+export function getCalendarDate(dateIso: string) {
+  const [year, month, day] = dateIso.slice(0, 10).split("-").map(Number);
+  return new Date(year, month - 1, day);
+}
+
 export function getMonthKey(dateIso: string) {
-  const date = new Date(dateIso);
+  const date = getCalendarDate(dateIso);
   return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
 }
 
 export function toDateInputValue(dateIso: string) {
-  const date = new Date(dateIso);
-  const tzOffset = date.getTimezoneOffset() * 60000;
-  return new Date(date.getTime() - tzOffset).toISOString().slice(0, 10);
+  return dateIso.slice(0, 10);
+}
+
+export function formatCalendarDate(dateIso: string) {
+  return shortDateFormatter.format(getCalendarDate(dateIso));
 }
 
 export function toMonthLabel(monthKey: string) {

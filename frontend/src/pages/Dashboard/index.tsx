@@ -15,9 +15,9 @@ import { LIST_TRANSACTIONS } from "@/lib/graphql/queries/Transactions";
 import { LIST_CATEGORIES } from "@/lib/graphql/queries/Categories";
 import {
   formatMoney,
+  formatCalendarDate,
   getMonthKey,
   moneyFormatter,
-  shortDateFormatter,
   summarizeByCategory,
   categoryColorMap,
   categoryIconMap,
@@ -147,7 +147,7 @@ export function DashboardPage() {
                           {item.description}
                         </p>
                         <p className="text-sm text-slate-500">
-                          {shortDateFormatter.format(new Date(item.date))}
+                          {formatCalendarDate(item.date)}
                         </p>
                       </div>
                     </div>

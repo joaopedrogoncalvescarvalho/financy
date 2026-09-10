@@ -47,14 +47,14 @@ export const transactionTypeLabel: Record<TransactionType, string> = {
 };
 
 export const categoryIconMap: Record<CategoryIcon, LucideIcon> = {
-  briefcase: BriefcaseBusiness,
-  car: CarFront,
+  briefcaseBusiness: BriefcaseBusiness,
+  carFront: CarFront,
   heartPulse: HeartPulse,
   piggyBank: PiggyBank,
   shoppingCart: ShoppingCart,
   ticket: Ticket,
-  creditCard: ToolCase,
-  utensilsCrossed: Utensils,
+  toolCase: ToolCase,
+  Utensils: Utensils,
   pawPrint: PawPrint,
   house: Home,
   gift: Gift,

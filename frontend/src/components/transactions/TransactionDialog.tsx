@@ -18,6 +18,7 @@ import {
   toDateInputValue,
   transactionTypeLabel,
 } from "@/lib/finance";
+import { formatMoneyInput, parseMoneyInput } from "@/lib/utils";
 import {
   CREATE_TRANSACTION,
   UPDATE_TRANSACTION,
@@ -65,7 +66,7 @@ export function TransactionDialog({
       setType(transaction.type);
       setDescription(transaction.description);
       setDate(toDateInputValue(transaction.date));
-      setValue(String(transaction.value));
+      setValue(formatMoneyInput(transaction.value.toFixed(2)));
       setCategoryId(transaction.categoryId);
       return;
     }
@@ -95,7 +96,7 @@ export function TransactionDialog({
       return;
     }
 
-    const parsedValue = Number(value.replace(",", "."));
+    const parsedValue = parseMoneyInput(value);
     if (!Number.isFinite(parsedValue) || parsedValue <= 0) {
       toast.error("Informe um valor valido");
       return;
@@ -212,12 +213,13 @@ export function TransactionDialog({
                   </span>
                   <Input
                     id="value"
-                    type="number"
-                    min="0"
-                    step="0.01"
+                    type="text"
+                    inputMode="decimal"
                     className="h-12 pl-12"
                     value={value}
-                    onChange={(event) => setValue(event.target.value)}
+                    onChange={(event) =>
+                      setValue(formatMoneyInput(event.target.value))
+                    }
                     required
                   />
                 </div>

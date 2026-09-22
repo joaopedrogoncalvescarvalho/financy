@@ -1,0 +1,59 @@
+name: Terraform deploy frontend infra
+
+on:
+  push:
+    tags:
+      - "*"
+    paths:
+      - "frontend/infra/**"
+      - ".github/workflows/terraform-deploy.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  terraform:
+    name: Terraform apply
+    runs-on: ubuntu-latest
+    environment: production
+    defaults:
+      run:
+        shell: bash
+
+    env:
+      TF_IN_AUTOMATION: true
+      TF_WORKING_DIR: frontend/infra/production
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.7.5
+
+      - name: Configure AWS credentials using OIDC
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::230082280184:role/financy-github-actions-role
+          aws-region: us-east-2
+
+      - name: Terraform format check
+        run: terraform -chdir=${TF_WORKING_DIR} fmt -check -diff
+
+      - name: Terraform init
+        run: terraform -chdir=${TF_WORKING_DIR} init
+
+      - name: Terraform validate
+        run: terraform -chdir=${TF_WORKING_DIR} validate
+
+      - name: Terraform plan
+        id: plan
+        run: terraform -chdir=${TF_WORKING_DIR} plan -out=tfplan
+
+      - name: Terraform apply
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production'
+        run: terraform -chdir=${TF_WORKING_DIR} apply -auto-approve tfplan

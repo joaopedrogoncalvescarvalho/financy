@@ -1,0 +1,15 @@
+# Terraform
+frontend/infra/**/.terraform/
+frontend/infra/**/*.tfstate
+frontend/infra/**/*.tfstate.*
+frontend/infra/**/crash.log
+frontend/infra/**/*.tfvars
+frontend/infra/**/*.tfvars.json
+frontend/infra/**/override.tf
+frontend/infra/**/override.tf.json
+frontend/infra/**/*_override.tf
+frontend/infra/**/*_override.tf.json
+
+# OS / editor
+.DS_Store
+Thumbs.db

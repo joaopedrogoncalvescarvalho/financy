@@ -36,12 +36,7 @@ resource "aws_iam_role" "github_actions" {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
           }
           StringLike = {
-            "token.actions.githubusercontent.com:sub" = [
-              "repo:joaopedrogoncalvescarvalho/financy:environment:production",
-              "repo:joaopedrogoncalvescarvalho/financy:ref:refs/heads/main",
-              "repo:joaopedrogoncalvescarvalho/financy:ref:refs/heads/production",
-              "repo:joaopedrogoncalvescarvalho/financy:ref:refs/tags/*"
-            ]
+            "token.actions.githubusercontent.com:sub" = "repo:joaopedrogoncalvescarvalho/financy:*"
           }
         }
       }

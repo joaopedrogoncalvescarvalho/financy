@@ -3,10 +3,10 @@ name: Terraform deploy frontend infra
 on:
   push:
     tags:
-      - "*"
+      - "**"
     paths:
       - "frontend/infra/**"
-      - ".github/workflows/terraform-deploy.yml"
+      - ".github/workflows/infra-production-deploy.yml"
   workflow_dispatch:
 
 permissions:
@@ -55,5 +55,5 @@ jobs:
         run: terraform -chdir=${TF_WORKING_DIR} plan -out=tfplan
 
       - name: Terraform apply
-        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production'
+        if: startsWith(github.ref, 'refs/tags/') || github.ref == 'refs/heads/main' || github.ref == 'refs/heads/production'
         run: terraform -chdir=${TF_WORKING_DIR} apply -auto-approve tfplan

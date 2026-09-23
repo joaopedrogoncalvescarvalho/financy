@@ -1,11 +1,11 @@
 # OIDC Provider for GitHub Actions
 resource "aws_iam_openid_connect_provider" "github_actions" {
   url = "https://token.actions.githubusercontent.com"
-  
+
   client_id_list = [
     "sts.amazonaws.com"
   ]
-  
+
   thumbprint_list = [
     "6938fd4d98bab03faadb97b34396831e3780aea1"
   ]
@@ -13,7 +13,7 @@ resource "aws_iam_openid_connect_provider" "github_actions" {
   tags = {
     Project     = "financy"
     Environment = "production"
-    Resource  = "github-actions-oidc"
+    Resource    = "github-actions-oidc"
     ManagedBy   = "terraform"
   }
 }
@@ -36,7 +36,11 @@ resource "aws_iam_role" "github_actions" {
             "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
           }
           StringLike = {
-            "token.actions.githubusercontent.com:sub" = "repo:*/financy:ref:refs/heads/production"
+            "token.actions.githubusercontent.com:sub" = [
+              "repo:joaopedrogoncalvescarvalho/financy:ref:refs/heads/main",
+              "repo:joaopedrogoncalvescarvalho/financy:ref:refs/heads/production",
+              "repo:joaopedrogoncalvescarvalho/financy:ref:refs/tags/*"
+            ]
           }
         }
       }
@@ -46,7 +50,7 @@ resource "aws_iam_role" "github_actions" {
   tags = {
     Project     = "financy"
     Environment = "all"
-    Resource  = "github-actions-role"
+    Resource    = "github-actions-role"
     ManagedBy   = "terraform"
   }
 }
@@ -63,7 +67,7 @@ resource "aws_iam_role_policy" "s3_deploy" {
         Effect = "Allow"
         Action = [
           "s3:GetObject",
-          "s3:PutObject", 
+          "s3:PutObject",
           "s3:DeleteObject",
           "s3:ListBucket"
         ]

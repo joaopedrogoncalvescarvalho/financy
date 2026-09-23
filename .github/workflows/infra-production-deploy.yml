@@ -39,6 +39,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::230082280184:role/financy-github-actions-role
+          role-session-name: financy-github-actions-role
           aws-region: us-east-2
 
       - name: Terraform format check

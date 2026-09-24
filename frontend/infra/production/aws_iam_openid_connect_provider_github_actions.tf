@@ -24,6 +24,7 @@ resource "aws_iam_role" "github_actions" {
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17"
+
     Statement = [
       {
         Effect = "Allow"
@@ -49,26 +50,61 @@ resource "aws_iam_role" "github_actions" {
   }
 }
 
-# IAM Policy for S3 deployment
-resource "aws_iam_role_policy" "s3_deploy" {
-  name = "financy-s3-deploy-policy"
+# IAM Policy for GitHub Actions
+resource "aws_iam_role_policy" "github_actions" {
+  name = "financy-github-actions-policy"
   role = aws_iam_role.github_actions.id
 
   policy = jsonencode({
     Version = "2012-10-17"
+
     Statement = [
       {
+        Sid    = "TerraformStateList"
+        Effect = "Allow"
+        Action = [
+          "s3:ListBucket"
+        ]
+        Resource = "arn:aws:s3:::infra-configure"
+        Condition = {
+          StringLike = {
+            "s3:prefix" = [
+              "financy/production/*"
+            ]
+          }
+        }
+      },
+      
+      {
+        Sid    = "TerraformStateObjects"
         Effect = "Allow"
         Action = [
           "s3:GetObject",
           "s3:PutObject",
           "s3:DeleteObject",
+        ]
+
+        Resource = "arn:aws:s3:::infra-configure/financy/production/*"
+      },
+
+      {
+        Sid    = "FrontendBucketList"
+        Effect = "Allow"
+        Action = [
           "s3:ListBucket"
         ]
-        Resource = [
-          aws_s3_bucket.frontend_static.arn,
-          "${aws_s3_bucket.frontend_static.arn}/*"
+        Resource = aws_s3_bucket.frontend_static.arn
+      },
+
+      {
+        Sid    = "FrontendBucketObjects"
+        Effect = "Allow"
+        Action = [
+          "s3:GetObject",
+          "s3:PutObject",
+          "s3:DeleteObject"
         ]
+        Resource = "${aws_s3_bucket.frontend_static.arn}/*"
       }
     ]
   })

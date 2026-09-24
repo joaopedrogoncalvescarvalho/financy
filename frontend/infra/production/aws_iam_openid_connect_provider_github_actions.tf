@@ -111,7 +111,8 @@ resource "aws_iam_role_policy" "github_actions" {
           "s3:GetBucketPublicAccessBlock",
           "s3:GetBucketOwnershipControls",
           "s3:GetBucketNotification",
-          "s3:GetAccelerateConfiguration"
+          "s3:GetAccelerateConfiguration",
+          "s3:GetBucketAccelerateConfiguration"
         ]
 
         Resource = aws_s3_bucket.frontend_static.arn

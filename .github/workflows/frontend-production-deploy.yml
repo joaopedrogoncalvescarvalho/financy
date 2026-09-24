@@ -3,7 +3,7 @@ name: Deploy WEB production
 on:
   workflow_run:
     workflows:
-      - Terraform deploy frontend infra
+      - Deploy INFRA production
     types:
       - completed
 

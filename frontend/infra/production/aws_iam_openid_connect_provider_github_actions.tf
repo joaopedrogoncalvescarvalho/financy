@@ -91,14 +91,26 @@ resource "aws_iam_role_policy" "github_actions" {
         Resource = "arn:aws:s3:::infra-configure/financy/production/*"
       },
 
-      # Frontend bucket
       {
-        Sid    = "FrontendBucketList"
+        Sid    = "FrontendBucket"
         Effect = "Allow"
 
         Action = [
           "s3:ListBucket",
-          "s3:GetBucketPolicy"
+          "s3:GetBucketAcl",
+          "s3:GetBucketPolicy",
+          "s3:GetBucketLocation",
+          "s3:GetBucketVersioning",
+          "s3:GetBucketWebsite",
+          "s3:GetBucketCors",
+          "s3:GetBucketLogging",
+          "s3:GetBucketTagging",
+          "s3:GetEncryptionConfiguration",
+          "s3:GetLifecycleConfiguration",
+          "s3:GetReplicationConfiguration",
+          "s3:GetBucketPublicAccessBlock",
+          "s3:GetBucketOwnershipControls",
+          "s3:GetBucketNotification"
         ]
 
         Resource = aws_s3_bucket.frontend_static.arn
@@ -110,20 +122,52 @@ resource "aws_iam_role_policy" "github_actions" {
 
         Action = [
           "s3:GetObject",
+          "s3:GetObjectAcl",
           "s3:PutObject",
-          "s3:DeleteObject"
+          "s3:PutObjectAcl",
+          "s3:DeleteObject",
+          "s3:ListBucketMultipartUploads",
+          "s3:ListMultipartUploadParts",
+          "s3:AbortMultipartUpload"
         ]
 
         Resource = "${aws_s3_bucket.frontend_static.arn}/*"
       },
 
-      # GitHub OIDC
       {
-        Sid    = "ReadGithubOidcProvider"
+        Sid    = "GithubActionsRole"
         Effect = "Allow"
 
         Action = [
-          "iam:GetOpenIDConnectProvider"
+          "iam:GetRole",
+          "iam:CreateRole",
+          "iam:DeleteRole",
+          "iam:UpdateRole",
+          "iam:UpdateAssumeRolePolicy",
+          "iam:GetRolePolicy",
+          "iam:PutRolePolicy",
+          "iam:DeleteRolePolicy",
+          "iam:ListRolePolicies",
+          "iam:ListAttachedRolePolicies",
+          "iam:ListInstanceProfilesForRole",
+          "iam:TagRole",
+          "iam:UntagRole"
+        ]
+
+        Resource = aws_iam_role.github_actions.arn
+      },
+
+      {
+        Sid    = "GithubOidcProvider"
+        Effect = "Allow"
+
+        Action = [
+          "iam:GetOpenIDConnectProvider",
+          "iam:CreateOpenIDConnectProvider",
+          "iam:UpdateOpenIDConnectProvider",
+          "iam:DeleteOpenIDConnectProvider",
+          "iam:TagOpenIDConnectProvider",
+          "iam:UntagOpenIDConnectProvider"
         ]
 
         Resource = aws_iam_openid_connect_provider.github_actions.arn

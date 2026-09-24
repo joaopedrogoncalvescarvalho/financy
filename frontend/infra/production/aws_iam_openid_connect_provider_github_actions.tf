@@ -74,7 +74,7 @@ resource "aws_iam_role_policy" "github_actions" {
           }
         }
       },
-      
+
       {
         Sid    = "TerraformStateObjects"
         Effect = "Allow"

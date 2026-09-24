@@ -62,10 +62,13 @@ resource "aws_iam_role_policy" "github_actions" {
       {
         Sid    = "TerraformStateList"
         Effect = "Allow"
+
         Action = [
           "s3:ListBucket"
         ]
+
         Resource = "arn:aws:s3:::infra-configure"
+
         Condition = {
           StringLike = {
             "s3:prefix" = [
@@ -78,33 +81,52 @@ resource "aws_iam_role_policy" "github_actions" {
       {
         Sid    = "TerraformStateObjects"
         Effect = "Allow"
+
         Action = [
           "s3:GetObject",
           "s3:PutObject",
-          "s3:DeleteObject",
+          "s3:DeleteObject"
         ]
 
         Resource = "arn:aws:s3:::infra-configure/financy/production/*"
       },
 
+      # Frontend bucket
       {
         Sid    = "FrontendBucketList"
         Effect = "Allow"
+
         Action = [
-          "s3:ListBucket"
+          "s3:ListBucket",
+          "s3:GetBucketPolicy"
         ]
+
         Resource = aws_s3_bucket.frontend_static.arn
       },
 
       {
         Sid    = "FrontendBucketObjects"
         Effect = "Allow"
+
         Action = [
           "s3:GetObject",
           "s3:PutObject",
           "s3:DeleteObject"
         ]
+
         Resource = "${aws_s3_bucket.frontend_static.arn}/*"
+      },
+
+      # GitHub OIDC
+      {
+        Sid    = "ReadGithubOidcProvider"
+        Effect = "Allow"
+
+        Action = [
+          "iam:GetOpenIDConnectProvider"
+        ]
+
+        Resource = aws_iam_openid_connect_provider.github_actions.arn
       }
     ]
   })

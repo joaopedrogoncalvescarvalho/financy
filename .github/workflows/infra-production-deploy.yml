@@ -1,4 +1,4 @@
-name: Terraform deploy frontend infra
+name: Deploy INFRA production
 
 on:
   push:

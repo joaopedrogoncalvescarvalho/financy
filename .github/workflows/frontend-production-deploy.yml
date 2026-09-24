@@ -1,0 +1,121 @@
+name: Deploy WEB production
+
+on:
+  workflow_run:
+    workflows:
+      - Terraform deploy frontend infra
+    types:
+      - completed
+
+  workflow_dispatch:
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  build-and-deploy-financy:
+    name: Build and Deploy Financy to Production
+    runs-on: ubuntu-latest
+
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
+
+    defaults:
+      run:
+        shell: bash
+        working-directory: frontend
+
+    env:
+      CUSTOMER: financy
+      ENVIRONMENT: production
+      BUCKET_NAME: financy-static-website-production
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build project
+        run: npm run build
+        env:
+          CI: false
+          GENERATE_SOURCEMAP: false
+          CUSTOMER: financy
+
+      - name: Verify build
+        run: |
+          echo "Verificando build..."
+
+          if [ ! -d "dist" ]; then
+            echo "ERROR: diretório dist não encontrado"
+            exit 1
+          fi
+
+          FILE_COUNT=$(find dist -type f | wc -l)
+
+          echo "Arquivos gerados: ${FILE_COUNT}"
+
+          if [ "${FILE_COUNT}" -eq 0 ]; then
+            echo "ERROR: build vazio"
+            exit 1
+          fi
+
+          echo "Build OK"
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::230082280184:role/financy-github-actions-role
+          role-session-name: github-actions-financy-deploy
+          aws-region: us-east-2
+
+      - name: Check S3 bucket
+        run: |
+          echo "Verificando bucket ${BUCKET_NAME}..."
+
+          if ! aws s3api head-bucket --bucket "${BUCKET_NAME}"; then
+            echo "ERROR: Bucket ${BUCKET_NAME} não existe ou não está acessível"
+            exit 1
+          fi
+
+          echo "Bucket encontrado"
+
+      - name: Deploy to S3
+        run: |
+          echo "Enviando build para s3://${BUCKET_NAME}"
+
+          # Arquivos estáticos: cache longo
+          aws s3 sync dist/ "s3://${BUCKET_NAME}/" \
+            --delete \
+            --cache-control "public, max-age=31536000, immutable" \
+            --exclude "*.html"
+
+          # HTML: sem cache
+          aws s3 sync dist/ "s3://${BUCKET_NAME}/" \
+            --delete \
+            --cache-control "no-cache, no-store, must-revalidate" \
+            --exclude "*" \
+            --include "*.html"
+
+          echo "Deploy concluído"
+
+      - name: Deployment summary
+        run: |
+          echo "## Financy Deployment" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "| Field | Value |" >> "$GITHUB_STEP_SUMMARY"
+          echo "|-------|-------|" >> "$GITHUB_STEP_SUMMARY"
+          echo "| **Bucket** | \`${BUCKET_NAME}\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| **Region** | \`us-east-2\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| **Customer** | \`${CUSTOMER}\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| **Environment** | \`${ENVIRONMENT}\` |" >> "$GITHUB_STEP_SUMMARY"
+          echo "| **Commit** | \`${GITHUB_SHA}\` |" >> "$GITHUB_STEP_SUMMARY"

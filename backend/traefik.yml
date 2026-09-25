@@ -1,0 +1,31 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    image: financy-api:1.0
+
+    expose:
+      - "3333"
+
+    env_file:
+      - .env
+
+    restart: unless-stopped
+
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.financy-api.rule=Host(`api.financy.aizen.dev.br`)
+      - traefik.http.routers.financy-api.entrypoints=websecure
+      - traefik.http.routers.financy-api.tls=true
+      - traefik.http.routers.financy-api.tls.certresolver=letsencrypt
+      - traefik.http.services.financy-api.loadbalancer.server.port=4000
+
+    networks:
+      - proxy
+
+networks:
+  proxy:
+    external: true
+    name: aizen-infra-production_proxy

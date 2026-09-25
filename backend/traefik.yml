@@ -7,7 +7,7 @@ services:
     image: financy-api:1.0
 
     expose:
-      - "3333"
+      - "4000"
 
     env_file:
       - .env

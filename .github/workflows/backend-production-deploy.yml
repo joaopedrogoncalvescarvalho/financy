@@ -29,13 +29,13 @@ jobs:
             git pull origin main
 
             echo "Construindo imagem..."
-            docker compose build
+            docker compose -f traefik.yml build
 
             echo "Subindo API..."
             docker compose -f traefik.yml up -d
 
             echo "Executando migrations..."
-            docker compose exec -T api npx prisma migrate deploy
+            docker compose -f traefik.yml exec -T api npx prisma migrate deploy
 
             echo "Limpando imagens antigas..."
             docker image prune -f

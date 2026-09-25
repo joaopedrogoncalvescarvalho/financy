@@ -5,10 +5,12 @@
     "lib": ["es2023", "dom"],
     "target": "es2023",
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "types": ["node"],
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "resolvePackageJsonImports": true,
+    "resolvePackageJsonExports": true
   }
 }

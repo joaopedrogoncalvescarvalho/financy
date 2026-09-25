@@ -3,7 +3,7 @@ terraform {
 
   backend "s3" {
     bucket  = "infra-configure"
-    key     = "financy/production/terraform-frontend.tfstate"
+    key     = "financy/production/terraform-backend.tfstate"
     region  = "us-east-2"
     encrypt = true
   }

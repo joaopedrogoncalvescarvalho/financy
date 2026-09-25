@@ -1,12 +1,12 @@
-name: Deploy INFRA production
+name: Deploy INFRA API production
 
 on:
   push:
     branches:
       - main
     paths:
-      - "frontend/infra/**"
-      - ".github/workflows/infra-production-deploy.yml"
+      - "backend/infra/**"
+      - ".github/workflows/infra-backend-production-deploy.yml"
 
   workflow_dispatch:
 
@@ -25,7 +25,7 @@ jobs:
 
     env:
       TF_IN_AUTOMATION: true
-      TF_WORKING_DIR: frontend/infra/production
+      TF_WORKING_DIR: backend/infra/production
 
     steps:
       - name: Checkout repository

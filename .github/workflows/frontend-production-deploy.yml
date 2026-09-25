@@ -3,7 +3,7 @@ name: Deploy WEB production
 on:
   workflow_run:
     workflows:
-      - Deploy INFRA production
+      - Deploy INFRA WEB production
     types:
       - completed
 

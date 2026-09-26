@@ -6,7 +6,7 @@ on:
       - main
   workflow_run:
     workflows:
-      - Deploy INFRA WEB production
+      - Deploy INFRA API production
     types:
       - completed
 

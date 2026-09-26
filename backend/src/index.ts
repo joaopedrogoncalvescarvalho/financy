@@ -6,7 +6,7 @@ import { buildSchema } from "type-graphql";
 import { expressMiddleware } from "@as-integrations/express5";
 import { AuthResolver } from "./resolvers/auth.resolver";
 import { UserResolver } from "./resolvers/user.resolver";
-import { buildContext } from "./graphql/context/index";
+import { buildContext } from "./graphql/context";
 import { CategoryResolver } from "./resolvers/category.resolver";
 import { TransactionResolver } from "./resolvers/transaction.resolver";
 

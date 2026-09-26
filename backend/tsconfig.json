@@ -9,8 +9,6 @@
     "esModuleInterop": true,
     "types": ["node"],
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "resolvePackageJsonImports": true,
-    "resolvePackageJsonExports": true
+    "emitDecoratorMetadata": true
   }
 }

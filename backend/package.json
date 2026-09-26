@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/src/index.js",
     "dev": "tsx watch src/index.ts",
     "seed": "tsx prisma/seed.ts",
     "migrate": "prisma migrate dev",
     "generate": "prisma generate",
-    "build": "tsc"
+    "build": "tsc-esm-fix"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +28,7 @@
     "graphql": "^16.11.0",
     "jsonwebtoken": "^9.0.2",
     "reflect-metadata": "^0.2.2",
+    "tsc-esm-fix": "^3.1.2",
     "type-graphql": "^2.0.0-rc.2"
   },
   "devDependencies": {

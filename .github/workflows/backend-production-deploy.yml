@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+  workflow_run:
+    workflows:
+      - Deploy INFRA WEB production
+    types:
+      - completed
 
   workflow_dispatch:
 

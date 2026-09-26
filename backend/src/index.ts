@@ -13,10 +13,9 @@ import { TransactionResolver } from "./resolvers/transaction.resolver";
 async function bootstrap() {
   const app = express();
 
-  // Habilitar CORS
   app.use(
     cors({
-      origin: "http://localhost:5173",
+      origin: String(process.env.CORS_ORIGIN),
       credentials: true,
     }),
   );

@@ -21,8 +21,6 @@ jobs:
     name: Build and Deploy Financy to Production
     runs-on: ubuntu-latest
 
-    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
-
     defaults:
       run:
         shell: bash

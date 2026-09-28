@@ -12,11 +12,12 @@ O domínio `financy.aizen.dev.br` está ativo e acessível como ambiente oficial
 
 ## Tecnologias
 
+- Node.js
 - React + TypeScript
 - Vite
-- Node.js
 - Docker
-- AWS S3 + CloudFront
+- Terraform
+- AWS S3, CloudFront, Route53
 - GitHub Actions (CI/CD)
 
 ## Como executar localmente
